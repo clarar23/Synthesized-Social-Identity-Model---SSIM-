@@ -7,9 +7,6 @@ from SSIM import run_simulation, n, num_steps, record_every
 
 num_seeds = 100
 
-# =====================================================================
-# --- EXECUTION BLOCK: GROUP SIZE SWEEP (100 SEEDS) ---
-# =====================================================================
 proportions = [0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]
 summary_stats = []      
 
@@ -35,7 +32,6 @@ for prop in proportions:
         fin_se_A.append(run_data['se_A'][-1])
         fin_se_B.append(run_data['se_B'][-1])
 
-    # Calculate Means and SDs for all metrics
     summary_stats.append({
         'prop_A': prop,
         'mean_op_A': np.mean(fin_op_A), 'sd_op_A': np.std(fin_op_A),
@@ -48,23 +44,16 @@ for prop in proportions:
 
 print("Simulations complete!")
 
-# =====================================================================
-# --- DATA EXPORT ---
-# =====================================================================
 script_dir = os.path.dirname(os.path.abspath(__file__))
 df_summary = pd.DataFrame(summary_stats)
 summary_path = os.path.join(script_dir, "exp_groupsize_100_summary.csv")
 df_summary.to_csv(summary_path, index=False, sep=";", decimal=",")
 
-# =====================================================================
-# --- PLOTTING: 1x3 BIFURCATION GRID (100 SEEDS) ---
-# =====================================================================
 plt.rcParams.update({'font.size': 14}) 
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 5))
 
 x_vals = df_summary['prop_A'] * 100 
 
-# --- PLOT 1: OPINIONS ---
 ax1.plot(x_vals, df_summary['mean_op_A'], marker='o', color='navy', linewidth=3, label='Group A')
 ax1.fill_between(x_vals, df_summary['mean_op_A'] - df_summary['sd_op_A'], df_summary['mean_op_A'] + df_summary['sd_op_A'], color='navy', alpha=0.15)
 ax1.plot(x_vals, df_summary['mean_op_B'], marker='o', color='darkred', linewidth=3, label='Group B')
@@ -72,14 +61,12 @@ ax1.fill_between(x_vals, df_summary['mean_op_B'] - df_summary['sd_op_B'], df_sum
 ax1.set_title("Final Mean Opinion")
 ax1.set_ylabel("Parameter Value")
 
-# --- PLOT 2: IDENTITIES ---
 ax2.plot(x_vals, df_summary['mean_id_A'], marker='o', color='navy', linewidth=3)
 ax2.fill_between(x_vals, df_summary['mean_id_A'] - df_summary['sd_id_A'], df_summary['mean_id_A'] + df_summary['sd_id_A'], color='navy', alpha=0.15)
 ax2.plot(x_vals, df_summary['mean_id_B'], marker='o', color='darkred', linewidth=3)
 ax2.fill_between(x_vals, df_summary['mean_id_B'] - df_summary['sd_id_B'], df_summary['mean_id_B'] + df_summary['sd_id_B'], color='darkred', alpha=0.15)
 ax2.set_title("Final Mean Identity")
 
-# --- PLOT 3: SELF-ESTEEM ---
 ax3.plot(x_vals, df_summary['mean_se_A'], marker='o', color='navy', linewidth=3)
 ax3.fill_between(x_vals, df_summary['mean_se_A'] - df_summary['sd_se_A'], df_summary['mean_se_A'] + df_summary['sd_se_A'], color='navy', alpha=0.15)
 ax3.plot(x_vals, df_summary['mean_se_B'], marker='o', color='darkred', linewidth=3)
