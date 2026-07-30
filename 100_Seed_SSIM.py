@@ -78,7 +78,6 @@ ax3.set_title("Mean Self-Esteem over Time")
 for ax in [ax1, ax2, ax3]:
     ax.set_ylim(0, 1)
     ax.set_xlabel("Time Steps")
-    # Optional: adjust x-axis formatting if numbers get too large
     ax.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
     ax.grid(True, linestyle='--', alpha=0.5)
 
