@@ -15,7 +15,6 @@ for prop in proportions:
     print(f"  Running Condition: prop_A = {prop:.2f}")
     run_data = run_simulation(seed=target_seed, prop_A=prop) 
     
-    # Store the final values for all 3 metrics directly
     summary_stats.append({
         'prop_A': prop,
         'fin_op_A': run_data['op_A'][-1], 'fin_op_B': run_data['op_B'][-1],
