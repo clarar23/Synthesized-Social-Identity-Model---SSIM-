@@ -3,25 +3,15 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 import os
 
-# --- Import the engine and constants from your core file! ---
 from SSIM import run_simulation, n, num_steps, record_every
-
-# =====================================================================
-# --- EXECUTION BLOCK (SINGLE SEED ABLATION) ---
-# =====================================================================
 
 target_seed = 975569
 print(f"Running Micro-Simulation Ablation (Seed: {target_seed})...")
 print("Condition: Identity Process Theory DISABLED (gamma=0)")
 
-# --- THE ABLATION TOGGLE ---
 run_data = run_simulation(seed=target_seed, gamma=0)
 
 print("Simulation complete.")
-
-# =====================================================================
-# --- DATA EXPORT (MICRO-LEVEL) ---
-# =====================================================================
 
 print("\nFormatting micro-data for CSV export (this may take a few seconds)...")
 micro_csv_rows = []
@@ -47,10 +37,6 @@ df_micro.to_csv(micro_save_path, index=False, sep=";", decimal=",")
 
 print(f"--> Micro-data successfully stored at:\n{micro_save_path}")
 
-# =====================================================================
-# --- VISUALIZATION: ALL 200 AGENTS ---
-# =====================================================================
-
 print("Drawing micro-level graphs...")
 plt.rcParams.update({'font.size': 14}) 
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6)) 
@@ -62,26 +48,22 @@ opinions_matrix = np.array(run_data['ind_opinions'])
 identities_matrix = np.array(run_data['ind_identities'])
 selfesteem_matrix = np.array(run_data['ind_selfesteem'])
 
-# Plot every single agent as a faint line
 for i, group in enumerate(run_data['agent_groups']):
     color = 'steelblue' if group == "A" else 'indianred'
     ax1.plot(x_axis, opinions_matrix[:, i], color=color, alpha=0.15, linewidth=1)
     ax2.plot(x_axis, identities_matrix[:, i], color=color, alpha=0.15, linewidth=1)
     ax3.plot(x_axis, selfesteem_matrix[:, i], color=color, alpha=0.15, linewidth=1)
 
-# Overlay the thick group means
 ax1.plot(x_axis, run_data['op_A'], color='navy', linewidth=3, label="Group A Mean")
 ax1.plot(x_axis, run_data['op_B'], color='darkred', linewidth=3, label="Group B Mean")
 ax2.plot(x_axis, run_data['id_A'], color='navy', linewidth=3)
 ax2.plot(x_axis, run_data['id_B'], color='darkred', linewidth=3)
 
-# Rolling average for mean self-esteem
 mean_se_A_roll = pd.Series(run_data['se_A']).rolling(window=window_size, min_periods=1).mean()
 mean_se_B_roll = pd.Series(run_data['se_B']).rolling(window=window_size, min_periods=1).mean()
 ax3.plot(x_axis, mean_se_A_roll, color='navy', linewidth=3)
 ax3.plot(x_axis, mean_se_B_roll, color='darkred', linewidth=3)
 
-# Formatting
 fig.suptitle(f"Ablation: Identity Process Theory DISABLED | Micro Trajectories (Seed: {target_seed})", fontsize=18, fontweight='bold')
 
 ax1.set_title("Fast Loop: Individual Opinions", pad=15)
