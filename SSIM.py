@@ -68,7 +68,6 @@ def run_simulation(seed,
         for ag in agents:
             ag.identity = ag.opinion
 
-    # Universal Dictionary: Tracks BOTH Macro-level stats and Micro-level agents
     history = {
         'op_A': [], 'op_B': [], 'id_A': [], 'id_B': [], 'se_A': [], 'se_B': [], 
         'sd_op_A': [], 'sd_op_B': [],
@@ -77,7 +76,6 @@ def run_simulation(seed,
     }
 
     def record_state():
-        # Macro (Group Means & Spread)
         history['op_A'].append(np.mean([ag.opinion for ag in agents if ag.group == "A"])) 
         history['op_B'].append(np.mean([ag.opinion for ag in agents if ag.group == "B"])) 
         history['id_A'].append(np.mean([ag.identity for ag in agents if ag.group == "A"]))  
@@ -86,8 +84,7 @@ def run_simulation(seed,
         history['se_B'].append(np.mean([ag.selfesteem for ag in agents if ag.group == "B"]))
         history['sd_op_A'].append(np.std([ag.opinion for ag in agents if ag.group == "A"]))
         history['sd_op_B'].append(np.std([ag.opinion for ag in agents if ag.group == "B"]))
-        
-        # Micro (Individual Agent Tracking for the Representative Seed Plot)
+       
         history['ind_opinions'].append([ag.opinion for ag in agents])
         history['ind_identities'].append([ag.identity for ag in agents])
         history['ind_selfesteem'].append([ag.selfesteem for ag in agents])
@@ -97,7 +94,6 @@ def run_simulation(seed,
     agents_A = [ag for ag in agents if ag.group == "A"]
     agents_B = [ag for ag in agents if ag.group == "B"]
 
-    # Social Identity Model Mechanisms
     for t in range(num_steps):
         ag_x = agents[np.random.randint(0, n)]
         
