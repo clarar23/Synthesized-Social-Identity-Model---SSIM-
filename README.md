@@ -8,4 +8,4 @@ The code allows for modification, so that more experiments and parameter changes
 
 ## Documentation
 You can download the full text of the thesis detailing the social identity model here: 
-[Download Thesis (PDF)](https://github.com/clarar23/Synthesized-Social-Identity-Model---SSIM-/releases/tag/v1.0-final-thesis)
+[Download Thesis (PDF)](https://github.com/clarar23/Synthesized-Social-Identity-Model---SSIM-/releases/download/v1.0-final-thesis/Thesis_SSIM.-.Modeling.Social.Identity.Dynamics.with.Agent-Based.Simulation_CS.Rademacher.pdf)
