@@ -8,4 +8,4 @@ The code allows for modification, so that more experiments and parameter changes
 
 ## Documentation
 You can download the full text of the thesis detailing the social identity model here: 
-[Download Thesis (PDF)](https://github.com/yourusername/yourrepo/releases/download/v1.0/thesis.pdf)
+[Download Thesis (PDF)]([https://github.com/yourusername/yourrepo/releases/download/v1.0/thesis.pdf](https://github.com/clarar23/Synthesized-Social-Identity-Model---SSIM-/releases/tag/v1.0-final-thesis))
