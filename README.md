@@ -5,3 +5,7 @@ The 100-seed simulations are to be used to illustrate what patterns a complex sy
 The agent trajectory simulations are to be used to illustrate how individual agents behave according to the SSIMs' mechanisms. 
 The code for the experiments are to be used to understand the experiments carried out in my thesis. 
 The code allows for modification, so that more experiments and parameter changes can be carried out to understand which inferences the SSIM makes under different circumstances.
+
+## Documentation
+You can download the full text of the thesis detailing the social identity model here: 
+[Download Thesis (PDF)](https://github.com/yourusername/yourrepo/releases/download/v1.0/thesis.pdf)
